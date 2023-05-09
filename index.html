@@ -2,9 +2,155 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>CoinStar</title>
+    <!-- icons -->
+    <script
+            src="https://kit.fontawesome.com/dc0460d8c0.js"
+            crossorigin="anonymous"
+    ></script>
+    <!-- bootstrap -->
+    <link
+            crossorigin="anonymous"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+            integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+            rel="stylesheet"
+    />
+    <meta
+            content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+            name="viewport"
+    />
+    <!-- STYLE/CSS -->
+    <link href="style/main.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
+<!-- Start: Header -->
+<header id="head">
+    <nav class="navigation">
+        <div class="container px-xl-0">
+            <div class="row justify-content-between align-items-center">
+                <div class="col-lg-auto text-lg-left brand-wrapper">
+                    <a class="brand" href="index.html">
+                        <i class="fa-regular fa-sparkles"></i>
+                        CoinStar
+                    </a>
+                </div>
+                <div class="col-lg-9 text-lg-right navigation-list">
+                    <a href="#" class="link color-white mr-15">Sign In</a>
+                    <a href="#" class="link color-white mx-15">Sign Up</a>
+                    <a href="#" class="link color-white mx-15">Marketplace</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <section>
+        <div class="container">
+            <div class="firstButton">
+                <div class="slogan">
+                    <p>Trade your coins now on the offical website</p>
+                </div>
+                <button class="btn" onclick="location.href='#Achievments';">
+                    Get Started Now
+                </button>
+            </div>
+        </div>
+    </section>
+</header>
+<!-- End: Header -->
+<main>
+    <!-- Start: Price -->
+    <section class="Price">
+        <div class="container">
+            <div class="row">
+                <div class="col-8 current-price">
+                    <h1>Current Price:</h1>
+                </div>
+                <div class="col-4 current-price-value">
+                    <p>100 Won</p>
+                </div>
+            </div>
+            <div>
+                <img src="images/stock-price-increase.jpg" style="height: 500px" alt="sample stockprice Graph">
+            </div>
+            <button class="btn" onclick="location.href='#Achievments';">
+                Start Trading Now!!!
+            </button>
+        </div>
+    </section>
+    <!-- End: Price -->
+</main>
 
+<!-- Start: Impressum -->
+<section class="Impressum">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-4">
+                <i class="fa-regular fa-sparkles"></i>
+                <h6>
+                    This website is protected by CoinStar.inc 2023. thank you for visiting.
+                </h6>
+                <br/>
+                <h6>
+                    Created by
+                    <span style="color: rgb(220, 20, 60);">Graphberry.</span
+                    >Belgrade, Serbia
+                </h6>
+                <i class="fa-sharp fa-solid fa-c"></i>
+                2023 - CoinStar.Inc
+            </div>
+            <div class="col-12 col-md-2">
+                <ul>
+                    <li><b>Links</b></li>
+                    <li><a href="#head">Home</a></li>
+                    <li><a href="#Services">Our Services</a></li>
+                    <li><a href="#Portfolio">Portfolio</a></li>
+                    <li><a href="#Customers">Testimonials</a></li>
+                    <li><a href="" onclick="PageDoesntExistYet()">Support</a></li>
+                    <li>
+                        <a href="" onclick="PageDoesntExistYet()"
+                        >Terms and Conditions</a
+                        >
+                    </li>
+                </ul>
+            </div>
+            <div class="col-12 col-md-2">
+                <ul>
+                    <li><b>About Us</b></li>
+                    <li><a href="" onclick="PageDoesntExistYet()">Sign In</a></li>
+                    <li><a href="" onclick="PageDoesntExistYet()">Register</a></li>
+                    <li><a href="#Inspiration">About Us</a></li>
+                    <li><a href="#Gallery">Blog</a></li>
+                    <li><a href="#Impressum">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="col-12 col-md-4">
+                <span style="font-size: 20px">Contact Us</span>
+                <h6>
+                    Get in touch with us via mail phone. We are waiting for your call
+                    or message.
+                </h6>
+                <a href="mailto:na_boehm@yahoo.com"
+                >
+                    <div class="Impressum-Email">info@coinstar.com
+                    </div>
+                </a>
+                <div class="Impressum-Icons">
+                    <i class="fa-brands fa-facebook"></i>
+                    <i class="fa-brands fa-twitter"></i>
+                    <i class="fa-brands fa-google-plus"></i>
+                    <i class="fa-solid fa-basketball"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Impressum -->
+
+<!-- JavaScript Bundle with Popper -->
+
+<script
+        crossorigin="anonymous"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+></script>
 </body>
 </html>

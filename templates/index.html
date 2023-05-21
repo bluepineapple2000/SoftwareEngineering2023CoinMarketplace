@@ -20,7 +20,7 @@
             name="viewport"
     />
     <!-- STYLE/CSS -->
-    <link href="style/main.css" rel="stylesheet" type="text/css"/>
+    <link href="@{/style/main.css}" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <!-- Start: Header -->
@@ -35,9 +35,16 @@
                     </a>
                 </div>
                 <div class="col-lg-9 text-lg-right navigation-list">
-                    <a href="#" class="link color-white mr-15">Sign In</a>
-                    <a href="#" class="link color-white mx-15">Sign Up</a>
-                    <a href="#" class="link color-white mx-15">Marketplace</a>
+                        {%if not userid%}
+                            <a href="http://localhost:5000/login" class="link color-white mr-15">Sign In</a>
+                            <a href="http://localhost:5000/signup" class="link color-white mx-15">Sign Up</a>
+                            <a href="#" class="link color-white mx-15">Marketplace</a>
+                        {%endif%}
+                        {%if userid%}
+                            <a>Hello! </a>{{userid}}
+                            <a href="http://localhost:5000/user"> your page</a>
+                            <a href="http://localhost:5000/logout"> logout</a>
+                        {%endif%}
                 </div>
             </div>
         </div>
@@ -115,8 +122,8 @@
             <div class="col-12 col-md-2">
                 <ul>
                     <li><b>About Us</b></li>
-                    <li><a href="" onclick="PageDoesntExistYet()">Sign In</a></li>
-                    <li><a href="" onclick="PageDoesntExistYet()">Register</a></li>
+                    <li><a href="http://localhost:5000l/ogin">Sign In</a></li>
+                    <li><a href="http://localhost:5000/signup">Register</a></li>
                     <li><a href="#Inspiration">About Us</a></li>
                     <li><a href="#Gallery">Blog</a></li>
                     <li><a href="#Impressum">Contact Us</a></li>

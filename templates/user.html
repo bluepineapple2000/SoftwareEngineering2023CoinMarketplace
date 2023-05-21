@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USER PAGE</title>
+    <link href="/docs/5.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEd
+    K2Kadq2F9CUG65" crossorigin="anonymous">
+    <link th:href="@{/style/user.css}" rel="stylesheet"/>
+</head>
+<body>
+    <div class="col-lg-8 mx-auto p-4 py-md-5">
+      
+        <main>
+          <h1>BALANCE & COINS</h1>
+          <p class="fs-5 col-md-8">BALANCE: {{bal}}</p>
+          <div class="container">
+            <form action = "http://localhost:5000/user" method = "post">
+                <div class="form-group">
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" name="balance" id="balance" placeholder="balance" />
+                            <div style="width: 200px;">
+                                <div class="radio-items">
+                                    <div class="col-6">
+                                        <input id="a1" class="only-sr checked" type="radio" name="account" value="depo" checked>
+                                        <label for="a1">depo</label>
+                                    </div>
+                                    <div class="col-6">
+                                        <input id="a2" class="only-sr" type="radio" name="account" value="withdraw">
+                                        <label for="a2">withdraw</label>
+                                    </div>
+                                </div>
+                                </div>
+                            <button type="submit" class="btn btn-primary btn-lg btn-block login-button" id="submit">DO IT</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            </div>
+            <p class="fs-5 col-md-8">COINS: {{co}}</p>
+        </main>
+      </div>
+      <script src="/docs/5.2/dist/js/bootstrap.bundle.min.js" 
+      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" 
+      crossorigin="anonymous"></script>
+
+</body>
+</html>

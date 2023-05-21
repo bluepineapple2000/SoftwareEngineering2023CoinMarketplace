@@ -177,3 +177,141 @@ header .firstButton .btn:hover {
 }
 
 /* Impressum End */
+
+
+.login-form{
+    width: calc(100% - 20px);
+    max-width: 500px;
+    background-color:#fff;
+    padding:50px 40px;
+}
+
+.login-form h1{
+    text-align:center;
+    margin:48px 0;
+    font-size: 2.3rem;
+    color: #111;
+}
+
+.textb{
+    margin-bottom: 12px;
+    position: relative;
+}
+
+.textb input{
+    width: 100%;
+    height: 70px;
+    border: none;
+    background-color: #ededed;
+    border-radius: 4px;
+    color: #333;
+    font-size: 1.0rem;
+    font-weight: 700;
+    padding: 1rpx 60px 0 10px;
+}
+
+.placeholder {
+    font-size: 1.0rem;
+    font-weight: 700;
+    ont-weight: 700;
+    position: absolute;
+    line-height: 70px;
+    top: 0;
+    left: 20px;
+    color: #9d9d9d;
+    user-select: none;
+    pointer-events: none;
+}
+
+.show-password {
+    position: absolute;
+    right: 20px;
+    line-height: 70px;
+    color: #9d9d9d;
+    font-size: 1.3rem;
+    cursor: pointer;
+}
+
+.textb input:focus ~ .placeholder,
+.textb input:valid ~ .placeholder {
+    left: 10px;
+    top: -10px;
+}
+
+.checkbox {
+    display: flex;
+    align-items: center;
+    position: relative;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #333;
+    margin: 20px 0;
+}
+
+.checkbox input {
+    width: 24px;
+    height: 24px;
+    -webkit-appearance: none;
+    background-color: #ededed;
+    border-radius: 4px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.checkbox .fa-check {
+    position: absolute;
+    color: #fff;
+    font-size: 1.1rem;
+    width: 24px;
+    text-align: center;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.checkbox input:checked {
+    background-color: #bc252a;
+}
+
+.checkbox input:checked + .fa-check {
+    opacity: 1;
+}
+
+.btn {
+    display: block;
+    width: 100px;
+    height: 100px;
+    margin: 40px auto;
+    background-color: #bc252a;
+    color: #fff;
+    font-size: 2.5rem;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: .3s linear;
+}
+
+.btn:hover {
+    opacity: .85;
+}
+
+.login-form a {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1.1rem;
+    color: #555;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 8px;
+    transition: .2s linear;
+}
+
+.login-form a:hover {
+    color: #111;
+}
+
+.btn:disabled {
+    background-color: transparent;
+    color: #ddd;
+    border: 2px solid;
+}

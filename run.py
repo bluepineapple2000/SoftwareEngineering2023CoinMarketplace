@@ -98,15 +98,19 @@ def user():
       collection.update_one(myquery, newvalues)
       for result in results:
          if result:
+            username = result['username']
+            email = result['email']
             bal = result['balance']
             co = result['coins']
-      return render_template('user.html', bal = bal, co = co)
+      return render_template('user.html', username = username, email = email,  bal = bal, co = co)
    else:
       for result in results:
          if result:
+            username = result['username']
+            email = result['email']
             bal = result['balance']
             co = result['coins']
-      return render_template('user.html', bal = bal, co = co)
+      return render_template('user.html', username = username, email = email,  bal = bal, co = co)
 
 
 

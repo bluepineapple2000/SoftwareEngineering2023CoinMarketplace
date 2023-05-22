@@ -13,6 +13,75 @@ rel="stylesheet"/>
 <!-- web font -->
 <link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet">
 <!-- //web font -->
+<style>
+    html,
+    body {
+        min-height:100vh;
+        display: flex;
+        justify-content: center;
+        background:-webkit-linear-gradient(left, #a445b2, #fa4299);
+    }
+
+    .container {
+      position:absolute;
+      top: 50%;
+      left:50%;
+      transform:translate(-50%,-50%);
+      max-width: 500px;
+      background: #fff;
+      padding:4px;
+      border-radius: 6px;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    }
+
+    .container .card .card-header{
+        position:relative;
+        font-size:22px;
+        font-weight:600;
+        color:#333;
+    }
+
+    .container .card .card-header::before{
+        content:'';
+        position:absolute;
+        left:0;
+        bottom:0;
+        height:3px;
+        width:28px;
+        border-radius:12px;
+        background:#4080f4;
+    }
+    .container form{
+        margin-top: 25px;
+    }
+
+    .container form .form-group{
+        height: 52px;
+        margin:18px 0;
+    }
+    form .form-group input{
+        height: 100%;
+        width: 100%;
+        outline:none;
+        font-size: 17px;
+        font-weight:40;
+        color:#333;
+        border: 1.5px solid #C7BEBE;
+        border-bottom-width: 2.5px;
+        border-radius:6px;
+    }
+    form .form-group button{
+        background: #4070f4;
+        width:100%;
+        color:#fff;
+        letter-spacing:1px;
+        border:none;
+        cursor: pointer;
+    }
+    form .form-group button:hover{
+        background: #0e4bf1;
+    }
+</style>
 </head>
 <body>
     {%if alert%}
@@ -25,52 +94,50 @@ rel="stylesheet"/>
         <div class="row justify-content-center">
                             <div class="col-md-8">
                                 <div class="card">
-                                    <div class="card-header">Register</div>
+                                    <div class="card-header">Registration</div>
                                     <div class="card-body">
-        
                                         <form class="form-horizontal">
                                             <div class="form-group">
-                                                <label for="username" class="cols-sm-2 control-label">Username</label>
+                                                <label for="username" class="cols-sm-2 control-label"></label>
                                                 <div class="cols-sm-10">
                                                     <div class="input-group">
                                                         <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-                                                        <input type="text" class="form-control" name="username" id="username" placeholder="username" />
+                                                        <input type="text" class="form-control" name="username" id="username" placeholder="enter username" />
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="email" class="cols-sm-2 control-label">Your Email</label>
+                                                <label for="email" class="cols-sm-2 control-label"></label>
                                                 <div class="cols-sm-10">
                                                     <div class="input-group">
                                                         <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-                                                        <input type="text" class="form-control" name="email" id="email" placeholder="email" />
+                                                        <input type="text" class="form-control" name="email" id="email" placeholder="enter email" />
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="password" class="cols-sm-2 control-label">Password</label>
+                                                <label for="password" class="cols-sm-2 control-label"></label>
                                                 <div class="cols-sm-10">
                                                     <div class="input-group">
                                                         <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                                                        <input type="password" class="form-control" name="password" id="password" placeholder="password" />
+                                                        <input type="password" class="form-control" name="password" id="password" placeholder="enter password" />
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="confirm" class="cols-sm-2 control-label">Confirm Password</label>
+                                                <label for="confirm" class="cols-sm-2 control-label"></label>
                                                 <div class="cols-sm-10">
                                                     <div class="input-group">
                                                         <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                                                        <input type="password" class="form-control" name="confirm" id="confirm" placeholder="confrim" />
+                                                        <input type="password" class="form-control" name="confirm" id="confirm" placeholder="confrim password" />
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="form-group ">
-                                                <button type="summit" class="btn btn-primary btn-lg btn-block login-button" id="signup">signup</button>
+                                            <div class="form-group">
+                                                <br>
+                                                <button type="summit" class="btn btn-primary btn-lg btn-block login-button" id="signup">Sign Up</button>
                                             </div>
-                                            <div class="login-register">
-                                                <a href="/">Login</a>
-                                            </div>
+                                            <br>Already have an account?  <a href="./login.html">here</a>
                                         </form>
                                     </div>
         

@@ -1,13 +1,10 @@
 from flask import Flask, render_template, request, current_app, g, redirect, session, jsonify
-from werkzeug.local import LocalProxy
-from flask_pymongo import PyMongo
+
 import ssl
 import certifi
 from pymongo import MongoClient
 from pymongo.server_api import ServerApi
-from pymongo.errors import DuplicateKeyError, OperationFailure
-from bson.objectid import ObjectId
-from bson.errors import InvalidId
+
 
 ca = certifi.where()
 uri = "mongodb+srv://adminuser2:adminuser2@softwareengineeringcoin.8oragfn.mongodb.net/?retryWrites=true&w=majority"
@@ -35,7 +32,7 @@ app = Flask(__name__)
 app.secret_key = 'software_engineering'
 
 @app.route('/')
-def student():
+def indexpage():
    userid=session.get('username',None)
    if 'username' in session: 
        return render_template('index.html', userid=session['username'])

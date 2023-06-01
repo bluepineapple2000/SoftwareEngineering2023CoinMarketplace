@@ -2,186 +2,148 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>CoinStar</title>
-    <!-- icons -->
-    <script
-            src="https://kit.fontawesome.com/dc0460d8c0.js"
-            crossorigin="anonymous"
-    ></script>
-    <!-- bootstrap -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IndexPage</title>
     <link
             crossorigin="anonymous"
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
             integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
-            rel="stylesheet"
-    />
-    <meta
-            content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
-            name="viewport"
-    />
-    <!-- STYLE/CSS -->
-    <link th:href="@{/style/main.css}" rel="stylesheet"/>
-    <style>
-        /* Schriftart */
-@font-face {
-    font-family: "Playfair_Display";
-    font-style: normal;
-    src: url(../Playfair_Display/PlayfairDisplay-VariableFont_wght.ttf);
-}
-/*Schriftart Ende */
-
-body {
-    font-family: "Playfair_Display";
-}
-
-/* Header */
-header, section {
-    overflow: hidden;
-}
-header {
-    position: relative;
-    background: #0A2463;
-}
-header nav {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-}
-nav {
-    width: 100%;
-    text-align: right;
-    margin-top: 10px;
-}
-.brand-wrapper a.brand {
-    color: #FF7F50;
-    font-size: 30px;
-    text-decoration: none;
-}
-.brand-wrapper a.brand:hover {
-    color: white;
-}
-.navigation-list a{
-    padding-left: 10px;
-    color: #ECECEC;
-    text-decoration: none;
-}
-.navigation-list a:hover{
-    color: #FF7F50;
-}
-
-header ul li a:hover {
-    color: #FF7F50;
-    text-decoration: underline;
-}
-header .firstButton{
-    color: #FAFAFA;
-    padding-top: 30vh;
-    text-align: center;
-    padding-bottom: 4vh;
-}
-header .firstButton p{
-    font-size: 30px;
-}
-header .firstButton .btn {
-    background-color: #FF7F50;
-    height: 55px;
-    width: 180px;
-    border-radius: 0%;
-    margin-top: 7vh;
-    font-size: 15px;
-    color: rgb(26, 26, 26);
-    letter-spacing: 6px;
-}
-header .firstButton .btn:hover {
-    background: transparent;
-    box-shadow: 0 0 20px 5px #FF7F50;
-    color: #FF7F50;
-}
-
-/* Header End */
-/* Price */
-.Price {
-    padding-top: 4vh;
-    text-align: center;
-    padding-bottom: 30px;
-    background: #F2FAFD;
-}
-
-.Price .current-price-value p{
-    font-size: 50px;
-    border: solid;
-}
-.Price .btn{
-    background-color: #FF7F50;
-    height: 60px;
-    width: 250px;
-    border-radius: 0%;
-    margin-top: 4vh;
-    font-size: 18px;
-    color: rgb(26, 26, 26);
-    letter-spacing: 6px;
-}
-.Price .btn:hover {
-    background: transparent;
-    box-shadow: 0 0 20px 5px #FF7F50;
-    color: #FF7F50;
-}
-/* Price End*/
-/* Impressum */
-
-.Impressum {
-    background-color: #333333;
-    color: #fff;
-    padding-top: 3rem;
-    padding-bottom: 2rem;
-}
-.Impressum .fa-sparkles {
-    font-size: 30px;
-}
-.Impressum h6 {
-    padding-top: 25px;
-}
-
-.Impressum .fa-sharp {
-    border: 2px solid #fff;
-    border-radius: 50%;
-    padding-left: 5px;
-    padding-right: 7px;
-}
-.Impressum ul {
-    list-style-type: none;
-}
-.Impressum li a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 10px;
-    letter-spacing: 2px;
-    padding-left: 20px;
-}
-.Impressum li b {
-    color: #fff;
-    text-decoration: none;
-    font-size: 14px;
-    letter-spacing: 2px;
-    padding-left: 20px;
-}
-.Impressum .Impressum-Email {
-    text-decoration: none;
-    padding-top: 10px;
-    padding-bottom: 5px;
-    margin-bottom: 20px;
-    color: rgb(255, 127, 80);
-}
-.Impressum a {
-    text-decoration: none;
-}
-
-/* Impressum End */
-    </style>
+            rel="stylesheet"/>
 </head>
-
 <body>
+<style>
+    body {
+        background: -webkit-linear-gradient(left, #3931af, #00c6ff);
+    }
+
+    /* Header */
+    header, section {
+        overflow: hidden;
+    }
+    header {
+        position: relative;
+        background: #F4F7FC;
+    }
+    header nav {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+    }
+    nav {
+        width: 100%;
+        text-align: right;
+        margin-top: 10px;
+    }
+    .brand-wrapper a.brand {
+        color: rgb( 58, 86, 196);
+        font-size: 35px;
+        text-decoration: none;
+    }
+    .brand-wrapper a.brand:hover {
+        color: rgb(8, 196, 254);
+    }
+
+    .navigation-list a {
+        padding-left: 10px;
+        color: rgb (58,86,196);
+        text-decoration: none;
+    }
+
+    .navigation-list a:hover {
+        color: rgb(8, 196,254);
+    }
+
+    header ul li a:hover {
+        color: #FF7F50;
+        text-decoration: underline;
+    }
+
+    header .firstButton {
+        color: rgb(58,86,196);
+        padding-top: 30vh;
+        text-align: center;
+        padding-bottom: 4vh;
+    }
+
+    header .firstButton p {
+        font-size: 30px;
+    }
+
+
+    input {
+        margin-bottom: -1px;
+        width: 25%;
+        height: 50px;
+        border: 1px solid #EAE7E7;
+        border-radius: 10px;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+        white-space: nowrap;
+    }
+
+    .emp-profile {
+        padding: 3%;
+        margin-top: 3%;
+        margin-bottom: 3%;
+        border-radius: 0.5rem;
+        background: #fff;
+    }
+
+    .profile-head h1 {
+        color: #333;
+    }
+
+    .profile-head h6 {
+        color: #0062cc;
+    }
+
+    .profile-tab label {
+        font-weight: 600;
+    }
+
+    .profile-tab p {
+        font-weight: 600;
+        color: #0062cc;
+    }
+
+    .form_radio_btn {
+        height: 45px;
+        border-radius: 10px;
+        white-space: nowrap;
+    }
+
+    .form_radio_btn input[type=radio] {
+        display: none;
+    }
+
+    .form_radio_btn label {
+        display: block;
+        border-radius: 10px;
+        margin: 0 auto;
+        text-align: center;
+        line-height: 45px;
+    }
+
+    /* Checked */
+    .form_radio_btn input[type=radio]:checked + label {
+        background: #0062cc;
+        color: #fff;
+    }
+
+    /* Hover */
+    .form_radio_btn label:hover {
+        color: #666;
+    }
+
+    /* Disabled */
+    .form_radio_btn input[type=radio] + label {
+        background: #F9FAFC;
+        color: #666;
+    }
+
+</style>
 <!-- Start: Header -->
 <header id="head">
     <nav class="navigation">
@@ -189,21 +151,19 @@ header .firstButton .btn:hover {
             <div class="row justify-content-between align-items-center">
                 <div class="col-lg-auto text-lg-left brand-wrapper">
                     <a class="brand" href="index.html">
-                        <i class="fa-regular fa-sparkles"></i>
                         CoinStar
                     </a>
                 </div>
                 <div class="col-lg-9 text-lg-right navigation-list">
-                        {%if not userid%}
-                            <a href="http://localhost:5000/login" class="link color-white mr-15">Sign In</a>
-                            <a href="http://localhost:5000/signup" class="link color-white mx-15">Sign Up</a>
-                            <a href="http://localhost:5000/marketplace" class="link color-white mx-15">Marketplace</a>
-                        {%endif%}
-                        {%if userid%}
-                            <a>Hello! </a>{{userid}}
-                            <a href="http://localhost:5000/user"> your page</a>
-                            <a href="http://localhost:5000/logout"> logout</a>
-                        {%endif%}
+                    {%if not userid%}
+                    <a href="http://localhost:5000/login" class="link color-white mr-15">Sign In</a>
+                    <a href="http://localhost:5000/signup" class="link color-white mx-15">Sign Up</a>
+                    {%endif%}
+                    {%if userid%}
+                    <a href="http://localhost:5000/user"> your page</a>
+                    <a href="http://localhost:5000/logout"> logout</a>
+                    <a href="http://localhost:5000/marketplace" class="link color-white mx-15">Marketplace</a>
+                    {%endif%}
                 </div>
             </div>
         </div>
@@ -212,92 +172,40 @@ header .firstButton .btn:hover {
         <div class="container">
             <div class="firstButton">
                 <div class="slogan">
-                    <p>Trade your coins now on the offical website</p>
+                    <p>Start Trading Now!!!</p>
                 </div>
-                <button class="btn" onclick="location.href='#Achievments';">
-                    Get Started Now
-                </button>
             </div>
         </div>
     </section>
 </header>
 <!-- End: Header -->
-<main>
-    <!-- Start: Price -->
-    <section class="Price">
+<div class="container emp-profile">
+    <form method="post" action="http://localhost:5000/">
         <div class="container">
             <div class="row">
-                <div class="col-8 current-price">
-                    <h1>Current Price:</h1>
+                <div class="col-6 current-price">
+                    <h2>Current Price:</h2>
                 </div>
-                <div class="col-4 current-price-value" >
+                <div class="col-4 current-price-value">
                     <p>{{currentCoinPrice}} won</p>
                 </div>
             </div>
             <div class="row">
-                <div class="col-8 current-price">
-                    <h1>Currently Available Coins on the Website:</h1>
+                <div class="col-6 current-price">
+                    <h2>Currently Available Coins on the Website:</h2>
                 </div>
-                <div class="col-4 current-price-value" >
+                <div class="col-4 current-price-value">
                     <p>{{currentCoinAmount}}</p>
                 </div>
             </div>
-            <div>
-                <img src="images/stock-price-increase.jpg" style="height: 500px" alt="sample stockprice Graph">
-            </div>
-            <button class="btn" onclick="location.href='#Achievments';">
-                Start Trading Now!!!
-            </button>
-        </div>
-    </section>
-    <!-- End: Price -->
-</main>
-
-<!-- Start: Impressum -->
-<section class="Impressum">
-    <div class="container">
-        <div class="row">
-            <div class="col-12 col-md-4">
-                <i class="fa-regular fa-sparkles"></i>
-                <h6>
-                    This website is protected by CoinStar.inc 2023. thank you for visiting.
-                </h6>
-            </div>
-            <div class="col-12 col-md-2">
-                <ul>
-                    <li><b>Links</b></li>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Our Services</a></li>
-                    <li><a href="#">Portfolio</a></li>
-                    <li><a href="#">Support</a></li>
-                </ul>
-            </div>
-            <div class="col-12 col-md-2">
-                <ul>
-                    <li><b>About Us</b></li>
-                    <li><a href="#">Sign In</a></li>
-                    <li><a href="#">Register</a></li>
-                    <li><a href="#">Marketplaces</a></li>
-                </ul>
-            </div>
-            <div class="col-12 col-md-4">
-                <span style="font-size: 20px">Contact Us</span>
-                <h6>
-                    Get in touch with us via mail. We are waiting for your message.
-                </h6>
-                <a href="mailto:na_boehm@yahoo.com"
-                >
-                    <div class="Impressum-Email">info@coinstar.com
-                    </div>
-                </a>
+            <div class="row justify-content-center">
+                <div class="col-8">
+                    <img src="images/stock-price-increase.jpg" style="height: 500px" alt="sample stockprice Graph">
+                </div>
             </div>
         </div>
-    </div>
-</section>
-<!-- End Impressum -->
-
-<!-- JavaScript Bundle with Popper -->
-
+    </form>
+</div>
 <script
         crossorigin="anonymous"
         integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
@@ -305,3 +213,6 @@ header .firstButton .btn:hover {
 ></script>
 </body>
 </html>
+
+
+

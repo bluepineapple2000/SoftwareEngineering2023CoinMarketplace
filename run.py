@@ -115,122 +115,104 @@ def user():
             co = result['coins']
       return render_template('user.html', username = username, email = email,  bal = bal, co = co)
 
-@app.route('/marketplace', methods = ['POST', 'GET'])
+
+@app.route('/marketplace', methods=['POST', 'GET'])
 def marketplace():
-   results = collection.find_one({"username":session["username"]})
-   resultsMarketplace = collectionMarketplace.find_one(sort=[("$natural", pymongo.DESCENDING)])
-   remainingCoins = collection.find_one({"username":'marketplace'})
-   val = request.form
-   if results:
-      bal = results['balance']
-      co = results['coins']
-      username = results['username']
-      email = results['email']
-      resultsMarketplace = collectionMarketplace.find_one(sort=[("$natural", pymongo.DESCENDING)])
-      coinsMarketplace = remainingCoins['coins']
-      price = resultsMarketplace['pricePerCoin']
+   username = session.get("username")
+   if not username:
+      return redirect('./login')
    if request.method == 'POST':
       if 'buyCoins' in request.form:
-         if int(val['buyfromwebsite']) > int(remainingCoins['coins']):
-            return render_template('marketplace.html',username = username, email = email, bal = bal, co = co, coins = coinsMarketplace, price = price, alert=True)
-         elif int(results['balance']) < int(val['buyfromwebsite']) * int(resultsMarketplace['pricePerCoin']):
-            return render_template('marketplace.html',username = username, email = email, bal = bal, co = co, coins = coinsMarketplace, price = price, alert=True)
-         # Update User Coins
-         filter = {"username":session["username"]}
-         update = {"$set": {"coins": results['coins'] +  int(val['buyfromwebsite'])}}
-         re = collection.update_one(filter, update)
-         # Update User Balance
-         update = {"$set": {"balance": int(results['balance']) - (int(val['buyfromwebsite']) * int(resultsMarketplace['pricePerCoin'])) }}
-         re = collection.update_one(filter, update)
-
-         # Update Marketplace Coins
-         filter = {"username":'marketplace'}
-         update = {"$set": {"coins": int(remainingCoins['coins']) - int(val['buyfromwebsite'])  }}
-         re = collection.update_one(filter, update)
-         results = collection.find_one({"username": session["username"]})
-         if results:
-            bal = results['balance']
-            co = results['coins']
-   resultsMarketplace = collectionMarketplace.find_one(sort=[("$natural", pymongo.DESCENDING)])
-   remainingCoins = collection.find_one({"username": 'marketplace'})
-   coinsMarketplace = remainingCoins['coins']
-   price = resultsMarketplace['pricePerCoin']
-   return render_template('marketplace.html', username = username, email = email,  bal = bal, co = co, coins = coinsMarketplace, price = price)
-
-@app.route('/posts', methods = ['POST', 'GET'])
-def posts():
-   results = collection.find_one({"username":session["username"]})
-   resultsMarketplace = collectionMarketplace.find_one(sort=[("$natural", pymongo.DESCENDING)])
-   val = request.form
-
-   # add all info to the site
-   bal = results['balance']
-   co = results['coins']
-   username = results['username']
-   email = results['email']
-   coinsMarketplace = collection.find_one({"username": 'marketplace'})['coins']
-   price = resultsMarketplace['pricePerCoin']
-   documents = list(collectionPosts.find())
-   if request.method == 'POST':
-      # make a post
-      if 'offerCoins' in request.form:
-         # Error Handling
-         # checks if user doesn't offer to many coins
-         resultyPosts = collectionPosts.find({'user': session["username"] })
-         remainingCoins = results['coins']
-         for result in resultyPosts:
-            remainingCoins -= int(result['amountOfCoins'])
-         if remainingCoins < int(val['AmountSelling']):
-            return render_template('post.html', username=username, email=email, bal=bal, co=co, coins=coinsMarketplace,
-                                   price=price, documents=documents, alert = True)
-         # End Error Handling
-         post = {"pricePerCoin": val['PriceSelling'], "amountOfCoins": val['AmountSelling'], "user": session["username"], "createdAt": datetime.now()}
-         collectionPosts.insert_one(post)
-      # buys coins
+         return buy_coins(username)
+      elif 'offerCoins' in request.form:
+         return offer_coins(username)
       elif 'buyPost' in request.form:
-         data = collectionPosts.find_one({"_id": ObjectId(val["buyPost"])} )
-         # Error Handling
-         # Not enough Money
-         if bal < int(data['amountOfCoins']) * int(data['pricePerCoin']):
-            return render_template('post.html', username=username, email=email, bal=bal, co=co, coins=coinsMarketplace,
-                                   price=price, documents=documents, alert=True)
-         # End Error handling
-         # Update Buyer Coins
-         filter = {"username":session["username"]}
-         update = {"$set": {"coins": int(data['amountOfCoins']) + int(results['coins'])}}
-         re = collection.update_one(filter, update)
-         # Update Buyer Balance
-         update = {"$set": {"balance": int(results['balance']) - (int(data['amountOfCoins']) * int(data['pricePerCoin']))}}
-         re = collection.update_one(filter, update)
-         # Update Seller Coins
-         filter = {"username": data['user']}
-         update = {"$set": {"coins": int(results['coins']) - int(data['amountOfCoins'])}}
-         re = collection.update_one(filter, update)
-         # Update Seller Balance
-         update = {"$set": {"balance": int(results['balance']) + (int(data['amountOfCoins']) * int(data['pricePerCoin']))}}
-         re = collection.update_one(filter, update)
-         # Update Price
-         post = {"pricePerCoin": data['pricePerCoin'], "createdAt": datetime.now()}
-         collectionMarketplace.insert_one(post)
-         # delete the Post
-         collectionPosts.delete_one({"_id": ObjectId(val["buyPost"])})
-   # Retrieve all documents from the collection
-   results = collection.find_one({"username": session["username"]})
-   resultsMarketplace = collectionMarketplace.find_one(sort=[("$natural", pymongo.DESCENDING)])
+         return buy_post(username)
+   return render_marketplace(username)
+
+def buy_post(username):
    val = request.form
-
-   # add all info to the site
-   bal = results['balance']
-   co = results['coins']
-   username = results['username']
-   email = results['email']
-   coinsMarketplace = collection.find_one({"username": 'marketplace'})['coins']
-   price = resultsMarketplace['pricePerCoin']
+   post = collectionPosts.find_one({"_id": ObjectId(val["buyPost"])})
+   user = collection.find_one({"username": username})
+   bal = user['balance']
+   co = user['coins']
+   username = user['username']
+   email = user['email']
+   price = post['pricePerCoin']
+   coinsMarketplace = collection.find_one({"username": "marketplace"})['coins']
    documents = list(collectionPosts.find())
+   if bal < int(post['amountOfCoins']) * int(post['pricePerCoin']):
+      return render_template('marketplace.html', username=username, email=email, bal=bal, co=co, coins=coinsMarketplace,
+                             alert='balance', price=price, documents=documents)
+   buyer_filter = {"username": session["username"]}
+   seller_filter = {"username": post['user']}
+   amount_of_coins = int(post['amountOfCoins'])
+   amount_to_deduct = amount_of_coins * int(post['pricePerCoin'])
+
+   # Update Buyer Coins
+   collection.update_one(buyer_filter, {"$inc": {"coins": amount_of_coins}})
+   # Update Buyer Balance
+   collection.update_one(buyer_filter, {"$inc": {"balance": -amount_to_deduct}})
+   # Update Seller Coins
+   collection.update_one(seller_filter, {"$inc": {"coins": -amount_of_coins}})
+   # Update Seller Balance
+   collection.update_one(seller_filter, {"$inc": {"balance": amount_to_deduct}})
+   # Update Price
+   collectionMarketplace.insert_one({"pricePerCoin": post['pricePerCoin'], "createdAt": datetime.now()})
+   # Delete the Post
+   collectionPosts.delete_one({"_id": ObjectId(val["buyPost"])})
+   return render_marketplace(username)
+
+def offer_coins(username):
+   coinsMarketplace = collection.find_one({"username": "marketplace"})['coins']
+   user = collection.find_one({"username": username})
+   bal = user['balance']
+   co = user['coins']
+   username = user['username']
+   email = user['email']
+   remainingCoins = user['coins'] - sum(int(result['amountOfCoins']) for result in collectionPosts.find({'user': session["username"]}))
+   val = request.form
+   if remainingCoins < int(val['AmountSelling']):
+      return render_template('marketplace.html', username=username, email=email, bal=bal, co=co, coins=coinsMarketplace,
+                             alert='coinsLeft', price=val['PriceSelling'])
+   post = {"pricePerCoin": val['PriceSelling'], "amountOfCoins": val['AmountSelling'], "user": session["username"],
+           "createdAt": datetime.now()}
+   collectionPosts.insert_one(post)
+   return render_marketplace(username)
+
+def buy_coins(username):
+   user = collection.find_one({"username": username})
+   marketplace = collectionMarketplace.find_one(sort=[("$natural", pymongo.DESCENDING)])
+   remainingCoins = collection.find_one({"username": "marketplace"})
    documents = list(collectionPosts.find())
-   return render_template('post.html', username = username, email = email,  bal = bal, co = co, coins = coinsMarketplace, price = price, documents=documents)
+   buyCoins = int(request.form['buyfromwebsite'])
+   coinsMarketplace = remainingCoins['coins']
+   price = marketplace['pricePerCoin']
 
+   if buyCoins > coinsMarketplace:
+      return render_template('marketplace.html', username=username, alert='coinsMarketplace', bal = user['balance'], co = user['coins'],
+                             coins=coinsMarketplace, documents=documents, price=price)
+   elif user['balance'] < buyCoins * price:
+      return render_template('marketplace.html', username=username, alert='balance', bal = user['balance'], co = user['coins'], coins=coinsMarketplace,
+                             documents=documents, price=price)
 
+   # Update User Coins
+   collection.update_one({"username": username}, {"$inc": {"coins": buyCoins}})
+   # Update User Balance
+   collection.update_one({"username": username}, {"$inc": {"balance": -buyCoins * price}})
+   # Update Marketplace Coins
+   collection.update_one({"username": "marketplace"}, {"$inc": {"coins": -buyCoins}})
+   user['coins'] += buyCoins
+   user['balance'] -= buyCoins * price
+   return render_marketplace(username)
+
+def render_marketplace(username):
+   user = collection.find_one({"username": username})
+   marketplace = collectionMarketplace.find_one(sort=[("$natural", pymongo.DESCENDING)])
+   remainingCoins = collection.find_one({"username": "marketplace"})
+   documents = list(collectionPosts.find())
+   return render_template('marketplace.html', username=username, documents=documents, bal = user['balance'], co = user['coins'],
+                          coins=remainingCoins['coins'], price=marketplace['pricePerCoin'])
 
 if __name__ == '__main__':
    app.run(debug = True)

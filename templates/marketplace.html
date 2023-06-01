@@ -4,18 +4,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>USER PAGE</title>
-    <link href="/docs/5.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEd
-    K2Kadq2F9CUG65" crossorigin="anonymous"/>
-    <link th:href="@{/style/user.css}" rel="stylesheet"/>
+    <title>Marketplace</title>
+    <link
+            crossorigin="anonymous"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+            integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+            rel="stylesheet"/>
 </head>
 <body>
-    {%if alert%}
-    <script type="text/javascript">
-        alert("the transaction is invalid");
-    </script>
-    {%endif%}
 <style>
     body {
         background: -webkit-linear-gradient(left, #3931af, #00c6ff);
@@ -48,65 +44,6 @@
         color: #0062cc;
     }
 
-    .profile-edit-btn {
-        border: none;
-        border-radius: 1.5rem;
-        width: 70%;
-        padding: 2%;
-        font-weight: 600;
-        color: #6c757d;
-        cursor: pointer;
-    }
-
-    .proile-rating {
-        font-size: 12px;
-        color: #818182;
-        margin-top: 5%;
-    }
-
-    .proile-rating span {
-        color: #495057;
-        font-size: 15px;
-        font-weight: 600;
-    }
-
-    .profile-head .nav-tabs {
-        margin-bottom: 5%;
-    }
-
-    .profile-head .nav-tabs .nav-link {
-        font-weight: 600;
-        border: none;
-    }
-
-    .profile-head .nav-tabs .nav-link.active {
-        border: none;
-        border-bottom: 2px solid #0062cc;
-    }
-
-    .profile-work {
-        padding: 14%;
-        margin-top: -15%;
-    }
-
-    .profile-work p {
-        font-size: 12px;
-        color: #818182;
-        font-weight: 600;
-        margin-top: 10%;
-    }
-
-    .profile-work a {
-        text-decoration: none;
-        color: #495057;
-        font-weight: 600;
-        font-size: 14px;
-    }
-
-    .profile-work ul {
-        list-style: none;
-    }
-
     .profile-tab label {
         font-weight: 600;
     }
@@ -114,14 +51,6 @@
     .profile-tab p {
         font-weight: 600;
         color: #0062cc;
-    }
-
-    .form_radio_btn {
-        width: 25%;
-        height: 45px;
-        border: 1px solid #EAE7E7;
-        border-radius: 10px;
-        white-space: nowrap;
     }
 
     .form_radio_btn input[type=radio] {
@@ -133,8 +62,11 @@
         border-radius: 10px;
         margin: 0 auto;
         text-align: center;
-        height: -webkit-fill-available;
         line-height: 45px;
+    }
+
+    .rowOfferCoins {
+        padding-bottom: 40px;
     }
 
     /* Checked */
@@ -153,100 +85,145 @@
         background: #F9FAFC;
         color: #666;
     }
+
+    .return {
+        color: grey;
+        text-decoration: none;
+    }
 </style>
+{%if alert%}
+<script type="text/javascript">
+    {%if alert == "coinsMarketplace" %}
+    alert("There are not enough Coins left in the Marketplace to be bought");
+    {%elif alert == "balance" %}
+    alert("You do not have enough money");
+    {% elif alert == "coinsLeft" %}
+    alert("Not enough coins left to sell");
+    {% else %}
+    alert("Unknown alert");
+    {% endif %}
+</script>
+{%endif%}
 <div class="container emp-profile">
-    <form method="post">
+    <form method="post" action="http://localhost:5000/marketplace">
         <div class="row">
             <div class="col-md-6">
                 <div class="profile-head">
                     <h1>
-                        USER PAGE
+                        Marketplace
                     </h1>
                     <hr>
                 </div>
             </div>
-            <div class="col-md-2"></div>
         </div>
         <div class="row">
-            <div style="padding:0px 0px 0px 250px;">
-                <div class="col-md-8">
-                    <div class="tab-content profile-tab" id="myTabContent">
-                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                            <br>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>User Name:</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>{{username}}</p><br>
-                                </div>
+            <div class="container">
+                <div class="tab-content profile-tab" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel">
+                        <br>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label>User Name:</label>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Coins</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>COINS: {{co}}</p><br>
-                                </div>
+                            <div class="col-md-2">
+                                <p>{{username}}</p><br>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Balance</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>BALANCE: {{bal}}</p><br>
-                                </div>
+                            <div class="col-md-2">
+                                <label>Coins</label>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Coins Website:</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>Coins: {{coins}}</p><br>
-                                </div>
+                            <div class="col-md-2">
+                                <p>COINS: {{co}}</p><br>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Price:</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>Price: {{price}}</p><br>
-                                </div>
+                            <div class="col-md-2">
+                                <label>Balance</label>
                             </div>
-                            <form action="http://localhost:5000/marketplace" method="post">
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-users fa"
-                                                                           aria-hidden="true"></i></span>
-                                        <input type="text" class="form-control" name="buyfromwebsite" id="buyfromwebsite"
-                                               placeholder="amount"/>
-                                        <label for="account" class="form-label"></label>
-                                        <button type="submit" class="btn btn-primary" name="buyCoins" id="buyCoins">Buy Coins</button>
-                                    </div>
-                                </div>
-                            </form>
-                            <form action="http://localhost:5000/marketplace" method="post" >
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-users fa"
-                                                                           aria-hidden="true"></i></span>
-                                        <input type="text" class="form-control" name="balance" id="AmountSelling"
-                                               placeholder="amount to offer"/>
-                                        <input type="text" class="form-control" name="balance" id="PriceSelling"
-                                               placeholder="price per coin"/>
-                                        <label for="account" class="form-label"></label>
-                                        <button type="submit" class="btn btn-primary" id="offerCoins">Offer Coins</button>
-                                    </div>
-                                </div>
-                            </form>
+                            <div class="col-md-2">
+                                <p>BALANCE: {{bal}}</p><br>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label>Coins Website:</label>
+                            </div>
+                            <div class="col-md-2">
+                                <p>Coins: {{coins}}</p><br>
+                            </div>
+                            <div class="col-md-2">
+                                <label>Price:</label>
+                            </div>
+                            <div class="col-md-2">
+                                <p>Price: {{price}}</p><br>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                           <span class="input-group-addon"><i class="fa fa-users fa"
+                                                              aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" name="buyfromwebsite" id="buyfromwebsite"
+                                       placeholder="amount"/>
+                                <label class="form-label"></label>
+                            </div>
+                            <div class="col-md-4">
+                                <button type="submit" class="btn btn-primary" name="buyCoins" id="buyCoins">Buy Coins
+                                    From Marketplace
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="row rowOfferCoins">
+            <div class="col-md-4">
+                <input type="text" class="form-control" name="AmountSelling" id="AmountSelling"
+                       placeholder="amount to offer"/>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control" name="PriceSelling" id="PriceSelling"
+                       placeholder="price per coin"/>
+            </div>
+            <div class="col-md-4">
+                <button type="submit" class="btn btn-primary" name="offerCoins" id="offerCoins">Offer Coins
+                </button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="h3 mb-3 fw-normal">All Offers</h3>
+            </div>
+        </div>
+        <div class="row">
+            {% for document in documents %}
+            <div class="col-md-3">
+                <p>{{ document.pricePerCoin }} won/Coin</p>
+            </div>
+            <div class="col-md-3">
+                <p>{{ document.amountOfCoins }} total Coins</p>
+            </div>
+            <div class="col-md-3">
+                <p>Offered by {{ document.user }}</p>
+            </div>
+            <div class="col-md-3">
+                <button type="submit" value="{{ document._id }}" name="buyPost">Buy this Offer</button>
+            </div>
+            {% endfor %}
+        </div>
+    <div class="row">
+    <div class="col-md-8"></div>
+    <div class="col-md-2 justify-content-center">
+        <a href="./" class="return">main page</a>
+    </div>
+    <div class="col-md-2 justify-content-center">
+        <a href="./user" class="return">user page</a>
+    </div>
 </div>
 </form>
 </div>
-<script src="/docs/5.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-        crossorigin="anonymous"></script>
+<script
+        crossorigin="anonymous"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+></script>
+</body>
+</html>

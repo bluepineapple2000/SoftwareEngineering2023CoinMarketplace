@@ -38,7 +38,7 @@ app = Flask(__name__)
 app.secret_key = 'software_engineering'
 
 @app.route('/')
-def indexpage():
+def index():
    userid=session.get('username',None)
    if 'username' in session: 
        return render_template('index.html', currentCoinPrice =  collection.find_one({'username': 'marketplace'})['coins'], currentCoinAmount = collectionMarketplace.find_one(sort=[("$natural", pymongo.DESCENDING)])['pricePerCoin'], userid=session['username'])

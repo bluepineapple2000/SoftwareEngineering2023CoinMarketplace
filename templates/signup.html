@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>signup</title>
     <link
@@ -7,9 +7,6 @@
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
             integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
             rel="stylesheet"/>
-    <!-- Custom Theme files -->
-    <link th:href="@{/style/signup.css}" rel="stylesheet" type="text/css" media="all"/>
-    <!-- //Custom Theme files -->
     <!-- web font -->
     <link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet">
     <!-- //web font -->
@@ -108,7 +105,7 @@
                 <div class="card">
                     <div class="card-header">Registration</div>
                     <div class="card-body">
-                        <form class="form-horizontal">
+                        <div class="form-horizontal">
                             <div class="form-group">
                                 <label for="username" class="cols-sm-2 control-label"></label>
                                 <div class="cols-sm-10">
@@ -161,14 +158,13 @@
                             </div>
                             <br>Already have an account? <a href="./login">here</a>
 
-                        </form>
-                        <h2 class="h2 fw-normal"><a href="./index">main page</a></h2>
+                        </div>
+                        <h2 class="h2 fw-normal"><a href="./">main page</a></h2>
                     </div>
                 </div>
             </div>
         </div>
     </form>
-
 </div>
 <script
         crossorigin="anonymous"

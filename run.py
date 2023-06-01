@@ -1,3 +1,6 @@
+from datetime import datetime
+
+import pymongo
 from flask import Flask, render_template, request, current_app, g, redirect, session, jsonify
 
 import ssl
@@ -11,6 +14,7 @@ uri = "mongodb+srv://adminuser2:adminuser2@softwareengineeringcoin.8oragfn.mongo
 client = MongoClient(uri, tls=True, tlsCAFile=ca)
 db = client['account']
 collection = db['account']
+collectionMarketplace = db ['marketplace']
 
 """
 def get_db():
@@ -108,6 +112,47 @@ def user():
             bal = result['balance']
             co = result['coins']
       return render_template('user.html', username = username, email = email,  bal = bal, co = co)
+
+@app.route('/marketplace', methods = ['POST', 'GET'])
+def marketplace():
+   results = collection.find_one({"username":session["username"]})
+   resultsMarketplace = collectionMarketplace.find_one(sort=[("$natural", pymongo.DESCENDING)])
+   val = request.form
+
+   if request.method == 'POST':
+      if 'buyCoins' in request.form:
+         # Update User Coins
+         filter = {"username":session["username"]}
+         update = {"$set": {"coins": results['coins'] +  int(val['buyfromwebsite'])}}
+         re = collection.update_one(filter, update)
+         # Update User Balance
+         if int(results['balance']) < int(val['buyfromwebsite']) * int(resultsMarketplace['pricePerCoin']):
+            return render_template('signup.html', alert=True)
+         update = {"$set": {"balance": int(results['balance']) - (int(val['buyfromwebsite']) * int(resultsMarketplace['pricePerCoin'])) }}
+         re = collection.update_one(filter, update)
+
+         # Update Marketplace Coins
+         if int(val['buyfromwebsite']) > int(resultsMarketplace['RemainingCoins']):
+            return render_template('signup.html', alert=True)
+         post = {"pricePerCoin": resultsMarketplace['pricePerCoin'], "RemainingCoins": int(resultsMarketplace['RemainingCoins']) - int(val['buyfromwebsite']) , "createdAt": datetime.now()}
+         collectionMarketplace.insert_one(post)
+
+         results = collection.find_one({"username": session["username"]})
+         if results:
+            bal = results['balance']
+            co = results['coins']
+   else:
+      if results:
+         bal = results['balance']
+         co = results['coins']
+   if results:
+      username = results['username']
+      email = results['email']
+   resultsMarketplace = collectionMarketplace.find_one(sort=[("$natural", pymongo.DESCENDING)])
+   coinsMarketplace = resultsMarketplace['RemainingCoins']
+   price = resultsMarketplace['pricePerCoin']
+   return render_template('marketplace.html', username = username, email = email,  bal = bal, co = co, coins = coinsMarketplace, price = price)
+
 
 
 

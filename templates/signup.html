@@ -1,155 +1,179 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>signup</title>
-<link
-crossorigin="anonymous"
-href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
-integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
-rel="stylesheet"/>
-<!-- Custom Theme files -->
-<link th:href="@{/style/signup.css}" rel="stylesheet" type="text/css" media="all" />
-<!-- //Custom Theme files -->
-<!-- web font -->
-<link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet">
-<!-- //web font -->
-<style>
-    html,
-    body {
-        min-height:100vh;
-        display: flex;
-        justify-content: center;
-        background:-webkit-linear-gradient(left, #a445b2, #fa4299);
-    }
+    <title>signup</title>
+    <link
+            crossorigin="anonymous"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+            integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+            rel="stylesheet"/>
+    <!-- Custom Theme files -->
+    <link th:href="@{/style/signup.css}" rel="stylesheet" type="text/css" media="all"/>
+    <!-- //Custom Theme files -->
+    <!-- web font -->
+    <link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet">
+    <!-- //web font -->
+    <style>
+        html,
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            background: -webkit-linear-gradient(left, #a445b2, #fa4299);
+        }
 
-    .container {
-      position:absolute;
-      top: 50%;
-      left:50%;
-      transform:translate(-50%,-50%);
-      max-width: 500px;
-      background: #fff;
-      padding:4px;
-      border-radius: 6px;
-      box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-    }
+        .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 500px;
+            background: #fff;
+            padding: 4px;
+            border-radius: 6px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            padding-bottom: 30px;
+        }
 
-    .container .card .card-header{
-        position:relative;
-        font-size:22px;
-        font-weight:600;
-        color:#333;
-    }
+        .container .card .card-header {
+            position: relative;
+            font-size: 22px;
+            font-weight: 600;
+            color: #333;
+        }
 
-    .container .card .card-header::before{
-        content:'';
-        position:absolute;
-        left:0;
-        bottom:0;
-        height:3px;
-        width:28px;
-        border-radius:12px;
-        background:#4080f4;
-    }
-    .container form{
-        margin-top: 25px;
-    }
+        .container .card .card-header::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 3px;
+            width: 28px;
+            border-radius: 12px;
+            background: #4080f4;
+        }
 
-    .container form .form-group{
-        height: 52px;
-        margin:18px 0;
-    }
-    form .form-group input{
-        height: 100%;
-        width: 100%;
-        outline:none;
-        font-size: 17px;
-        font-weight:40;
-        color:#333;
-        border: 1.5px solid #C7BEBE;
-        border-bottom-width: 2.5px;
-        border-radius:6px;
-    }
-    form .form-group button{
-        background: #4070f4;
-        width:100%;
-        color:#fff;
-        letter-spacing:1px;
-        border:none;
-        cursor: pointer;
-    }
-    form .form-group button:hover{
-        background: #0e4bf1;
-    }
-</style>
+        .container form {
+            margin-top: 25px;
+        }
+
+        .container form .form-group {
+            height: 52px;
+            margin: 18px 0;
+        }
+
+        form .form-group input {
+            height: 100%;
+            width: 100%;
+            outline: none;
+            font-size: 17px;
+            font-weight: 40;
+            color: #333;
+            border: 1.5px solid #C7BEBE;
+            border-bottom-width: 2.5px;
+            border-radius: 6px;
+        }
+
+        form .form-group button {
+            background: #4070f4;
+            width: 100%;
+            color: #fff;
+            letter-spacing: 1px;
+            border: none;
+            cursor: pointer;
+        }
+
+        form .form-group button:hover {
+            background: #0e4bf1;
+        }
+
+        h2 a {
+            text-decoration: None;
+            color: grey;
+            font-size: small;
+            margin-bottom: 0px;
+        }
+    </style>
 </head>
 <body>
-    {%if alert%}
-    <script type="text/javascript">
-        alert("already exists");
-    </script>
-    {%endif%}
-	<div class="container">
-        <form action = "http://localhost:5000/signup" method = "post">
+{%if alert%}
+<script type="text/javascript">
+    alert("already exists");
+</script>
+{%endif%}
+<div class="container">
+    <form action="http://localhost:5000/signup" method="post">
         <div class="row justify-content-center">
-                            <div class="col-md-8">
-                                <div class="card">
-                                    <div class="card-header">Registration</div>
-                                    <div class="card-body">
-                                        <form class="form-horizontal">
-                                            <div class="form-group">
-                                                <label for="username" class="cols-sm-2 control-label"></label>
-                                                <div class="cols-sm-10">
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-                                                        <input type="text" class="form-control" name="username" id="username" placeholder="enter username" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="email" class="cols-sm-2 control-label"></label>
-                                                <div class="cols-sm-10">
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-                                                        <input type="text" class="form-control" name="email" id="email" placeholder="enter email" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="password" class="cols-sm-2 control-label"></label>
-                                                <div class="cols-sm-10">
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                                                        <input type="password" class="form-control" name="password" id="password" placeholder="enter password" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="confirm" class="cols-sm-2 control-label"></label>
-                                                <div class="cols-sm-10">
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                                                        <input type="password" class="form-control" name="confirm" id="confirm" placeholder="confrim password" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <br>
-                                                <button type="summit" class="btn btn-primary btn-lg btn-block login-button" id="signup">Sign Up</button>
-                                            </div>
-                                            <br>Already have an account?  <a href="./login">here</a>
-                                        </form>
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">Registration</div>
+                    <div class="card-body">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label for="username" class="cols-sm-2 control-label"></label>
+                                <div class="cols-sm-10">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-users fa"
+                                                                           aria-hidden="true"></i></span>
+                                        <input type="text" class="form-control" name="username" id="username"
+                                               placeholder="enter username"/>
                                     </div>
-        
                                 </div>
                             </div>
-                        </div>
+                            <div class="form-group">
+                                <label for="email" class="cols-sm-2 control-label"></label>
+                                <div class="cols-sm-10">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-envelope fa"
+                                                                           aria-hidden="true"></i></span>
+                                        <input type="text" class="form-control" name="email" id="email"
+                                               placeholder="enter email"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="cols-sm-2 control-label"></label>
+                                <div class="cols-sm-10">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-lock fa-lg"
+                                                                           aria-hidden="true"></i></span>
+                                        <input type="password" class="form-control" name="password" id="password"
+                                               placeholder="enter password"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="confirm" class="cols-sm-2 control-label"></label>
+                                <div class="cols-sm-10">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-lock fa-lg"
+                                                                           aria-hidden="true"></i></span>
+                                        <input type="password" class="form-control" name="confirm" id="confirm"
+                                               placeholder="confrim password"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <br>
+                                <button type="summit" class="btn btn-primary btn-lg btn-block login-button" id="signup">
+                                    Sign Up
+                                </button>
+                            </div>
+                            <br>Already have an account? <a href="./login">here</a>
+
+                        </form>
+                        <h2 class="h2 fw-normal"><a href="./index">main page</a></h2>
+                    </div>
+                </div>
+            </div>
         </div>
     </form>
-        <script
-    crossorigin="anonymous"
-    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+
+</div>
+<script
+        crossorigin="anonymous"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
 ></script>
 </body>
 </html>

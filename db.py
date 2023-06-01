@@ -16,18 +16,11 @@ client = MongoClient(uri, tls=True, tlsCAFile=ca)
 db = client['account']
 collection = db['posts']
 
-post = {"username": "marketplace", }
-
+post = {"pricePerCoin": 110, "amountOfCoins": 4, "user": "qwe", "createdAt": datetime.now()}
 
 collection.insert_one(post)
 
-# Retrieve the last entered document in the collection
-last_document = collection.find_one(sort=[("$natural", pymongo.DESCENDING)])
-
-# Print the last document
-print(last_document)
-
-results = collection.find({"pricePerCoin": 100},{ "RemainingCoins": 1, "createdAt": 2})
+results = collection.find()
 
 #results = collection.find().sort({'_id':-1}).limit(1)
 for results in results:

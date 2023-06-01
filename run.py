@@ -41,9 +41,9 @@ app.secret_key = 'software_engineering'
 def indexpage():
    userid=session.get('username',None)
    if 'username' in session: 
-       return render_template('index.html', userid=session['username'])
+       return render_template('index.html', currentCoinPrice =  collection.find_one({'username': 'marketplace'})['coins'], currentCoinAmount = collectionMarketplace.find_one(sort=[("$natural", pymongo.DESCENDING)])['pricePerCoin'], userid=session['username'])
    else:
-      return render_template('index.html')
+      return render_template('index.html', currentCoinPrice =  collection.find_one({'username': 'marketplace'})['coins'], currentCoinAmount = collectionMarketplace.find_one(sort=[("$natural", pymongo.DESCENDING)])['pricePerCoin'])
 
 @app.route('/login', methods = ['POST', 'GET'])
 def login():

@@ -14,9 +14,9 @@ uri = "mongodb+srv://adminuser2:adminuser2@softwareengineeringcoin.8oragfn.mongo
 client = MongoClient(uri, tls=True, tlsCAFile=ca)
 
 db = client['account']
-collection = db['marketplace']
+collection = db['posts']
 
-post = {"pricePerCoin": 90, "RemainingCoins": 10, "createdAt":  datetime.now()}
+post = {"username": "marketplace", }
 
 
 collection.insert_one(post)
@@ -27,9 +27,9 @@ last_document = collection.find_one(sort=[("$natural", pymongo.DESCENDING)])
 # Print the last document
 print(last_document)
 
-# results = collection.find({"pricePerCoin": 100},{ "RemainingCoins": 1, "createdAt": 2})
+results = collection.find({"pricePerCoin": 100},{ "RemainingCoins": 1, "createdAt": 2})
 
 #results = collection.find().sort({'_id':-1}).limit(1)
-#for results in results:
-#    print(results)
+for results in results:
+    print(results)
 

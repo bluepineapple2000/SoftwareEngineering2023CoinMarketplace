@@ -41,12 +41,12 @@ def nocache(view):
 def index():
    userid=session.get('username',None)
    if 'username' in session: 
-       return render_template('index.html', currentCoinPrice =  collection.find_one({'username': 'marketplace'})['coins'],
-                               currentCoinAmount = collectionMarketplace.find_one(sort=[("$natural", pymongo.DESCENDING)])['pricePerCoin'],
+       return render_template('index.html', currentCoinAmount =  collection.find_one({'username': 'marketplace'})['coins'],
+                               currentCoinPrice = collectionMarketplace.find_one(sort=[("$natural", pymongo.DESCENDING)])['pricePerCoin'],
                                  userid=session['username'])
    else:
-      return render_template('index.html', currentCoinPrice =  collection.find_one({'username': 'marketplace'})['coins'],
-                              currentCoinAmount = collectionMarketplace.find_one(sort=[("$natural", pymongo.DESCENDING)])['pricePerCoin'])
+      return render_template('index.html', currentCoinAmount =  collection.find_one({'username': 'marketplace'})['coins'],
+                              currentCoinPrice = collectionMarketplace.find_one(sort=[("$natural", pymongo.DESCENDING)])['pricePerCoin'])
 
 @app.route('/fig')
 def fig():

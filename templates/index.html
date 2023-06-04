@@ -71,6 +71,10 @@
         font-size: 30px;
     }
 
+    img {
+        object-fit: cover;
+    }
+
 
     input {
         margin-bottom: -1px;
@@ -198,7 +202,7 @@
                     <p>{{currentCoinAmount}}</p>
                 </div>
             </div>
-            <div class="row justify-content-center">
+            <div class="row justify-content">
                 <div class="col-8">
                     <img src="{{ url_for('fig')}}" alt="Image Placeholder">
                 </div>

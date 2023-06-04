@@ -121,10 +121,8 @@
                                 <label for="email" class="cols-sm-2 control-label"></label>
                                 <div class="cols-sm-10">
                                     <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-envelope fa"
-                                                                           aria-hidden="true"></i></span>
-                                        <input type="text" class="form-control" name="email" id="email"
-                                               placeholder="enter email"/>
+                                        <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                                        <input type="email" class="form-control" name="email" id="email" placeholder="enter email" required/>
                                     </div>
                                 </div>
                             </div>
@@ -132,10 +130,8 @@
                                 <label for="password" class="cols-sm-2 control-label"></label>
                                 <div class="cols-sm-10">
                                     <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-lock fa-lg"
-                                                                           aria-hidden="true"></i></span>
-                                        <input type="password" class="form-control" name="password" id="password"
-                                               placeholder="enter password"/>
+                                        <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                        <input type="password" class="form-control" name="password" id="password" placeholder="enter password" required/>
                                     </div>
                                 </div>
                             </div>
@@ -143,21 +139,29 @@
                                 <label for="confirm" class="cols-sm-2 control-label"></label>
                                 <div class="cols-sm-10">
                                     <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-lock fa-lg"
-                                                                           aria-hidden="true"></i></span>
-                                        <input type="password" class="form-control" name="confirm" id="confirm"
-                                               placeholder="confrim password"/>
+                                        <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                        <input type="password" class="form-control" name="confirm" id="confirm" placeholder="confrim password" required/>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <br>
-                                <button type="summit" class="btn btn-primary btn-lg btn-block login-button" id="signup">
-                                    Sign Up
-                                </button>
-                            </div>
+                                <button type="summit" class="btn btn-primary btn-lg btn-block login-button" id="signup" onclick="validatePassword()">Sign Up</button>
+                                <script>
+                                    function validatePassword(){
+                                        var password = document.getElementById("password")
+                                        , confirm_password = document.getElementById("confirm");
+                                        if(password.value != confirm_password.value) {
+                                            confirm_password.setCustomValidity("Passwords Don't Match");
+                                        } else {
+                                            confirm_password.setCustomValidity('');
+                                        }
+                                        password.onchange = validatePassword;
+                                        confirm_password.onkeyup = validatePassword;
+                                    }
+                                </script>
                             <br>Already have an account? <a href="./login">here</a>
-
+                            </div>
                         </div>
                         <h2 class="h2 fw-normal"><a href="./">main page</a></h2>
                     </div>

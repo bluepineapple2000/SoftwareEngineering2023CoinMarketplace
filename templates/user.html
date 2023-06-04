@@ -92,6 +92,15 @@
         text-decoration: none;
     }
 </style>
+
+{%with messages = get_flashed_messages()%}
+{%if messages %}
+  <script type="text/javascript">
+    alert("{{messages[-1]}}");
+  </script>
+  {%endif%}
+{%endwith%}
+
 <div class="container emp-profile">
     <form method="post" action="http://localhost:5000/user">
         <div class="row">

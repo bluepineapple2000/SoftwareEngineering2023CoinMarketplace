@@ -2,9 +2,14 @@ from datetime import datetime
 
 import pymongo
 from bson import ObjectId
-from flask import Flask, render_template, request, current_app, g, redirect, session, jsonify
+from flask import Flask, render_template, request, current_app, g, redirect, session, jsonify, flash, send_file
 
 import ssl
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+from io import BytesIO
+
 import certifi
 from pymongo import MongoClient
 from pymongo.server_api import ServerApi
@@ -18,32 +23,46 @@ collection = db['account']
 collectionMarketplace = db ['marketplace']
 collectionPosts = db['posts']
 
-"""
-def get_db():
-   
-   Configuration method to return db instance
-   
-   db = getattr(g, "_database", None)
-
-   if db is None:
-      db = g._database = PyMongo(current_app).db
-
-   return db
-
-# Use LocalProxy to read the global db instance with just `db`
-db = LocalProxy(get_db)
-"""
-
 app = Flask(__name__)
 app.secret_key = 'software_engineering'
-
+"""
+def nocache(view):
+  @wraps(view)
+  def no_cache(*args, **kwargs):
+    response = make_response(view(*args, **kwargs))
+    response.headers['Last-Modified'] = datetime.now()
+    response.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0, max-age=0'
+    response.headers['Pragma'] = 'no-cache'
+    response.headers['Expires'] = '-1'
+    return response      
+  return update_wrapper(no_cache, view)
+"""
 @app.route('/')
 def index():
    userid=session.get('username',None)
    if 'username' in session: 
-       return render_template('index.html', currentCoinPrice =  collection.find_one({'username': 'marketplace'})['coins'], currentCoinAmount = collectionMarketplace.find_one(sort=[("$natural", pymongo.DESCENDING)])['pricePerCoin'], userid=session['username'])
+       return render_template('index.html', currentCoinPrice =  collection.find_one({'username': 'marketplace'})['coins'],
+                               currentCoinAmount = collectionMarketplace.find_one(sort=[("$natural", pymongo.DESCENDING)])['pricePerCoin'],
+                                 userid=session['username'])
    else:
-      return render_template('index.html', currentCoinPrice =  collection.find_one({'username': 'marketplace'})['coins'], currentCoinAmount = collectionMarketplace.find_one(sort=[("$natural", pymongo.DESCENDING)])['pricePerCoin'])
+      return render_template('index.html', currentCoinPrice =  collection.find_one({'username': 'marketplace'})['coins'],
+                              currentCoinAmount = collectionMarketplace.find_one(sort=[("$natural", pymongo.DESCENDING)])['pricePerCoin'])
+
+@app.route('/fig')
+def fig():
+   priceList=[]
+   for item in collectionMarketplace.find({}):
+      priceList.append(int(item['pricePerCoin']))
+   x = range(0,len(priceList))
+   plt.plot(x,priceList, color='#FFFFFF', marker='o')
+   plt.gca().set_facecolor('#212946')
+   plt.gca().axes.xaxis.set_visible(False)
+   plt.grid(True, color='#2A3459')
+   plt.ylabel('Price per Coin')
+   img = BytesIO()
+   plt.savefig(img, format='png', dpi=100)
+   img.seek(0)
+   return send_file(img, mimetype='image/png')
 
 @app.route('/login', methods = ['POST', 'GET'])
 def login():
@@ -86,8 +105,13 @@ def logout():
 @app.route('/user', methods = ['POST', 'GET'])
 def user():
    results = collection.find({"username":session["username"]})
+   temps = collection.find({"username":session["username"]})
    myquery = { "username": session['username'] }
    bal = 0
+   temp_bal = 0
+   for temp in temps:
+      if temp:
+         temp_bal = temp['balance']
    if request.method == 'POST':
       val = request.form
       results = collection.find({"username":session["username"]})
@@ -95,10 +119,14 @@ def user():
 
       if val['account'] == 'depo':
          newvalues = {'$inc': {'balance': int(val['balance'])}}
+         collection.update_one(myquery, newvalues)
       elif val['account'] == 'withdraw':
-         newvalues = {'$inc': {'balance': -1 * int(val['balance'])}}
+         if(int(val['balance'])>temp_bal):
+            flash("DO NOT WITHDRAW MORE THAN YOU HAVE")
+         else:
+            newvalues = {'$inc': {'balance': -1 * int(val['balance'])}}
+            collection.update_one(myquery, newvalues)
 
-      collection.update_one(myquery, newvalues)
       for result in results:
          if result:
             username = result['username']

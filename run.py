@@ -222,8 +222,7 @@ def buy_coins(username):
    documents = list(collectionPosts.find())
    buyCoins = int(request.form['buyfromwebsite'])
    coinsMarketplace = remainingCoins['coins']
-   price = marketplace['pricePerCoin']
-   price = int(price)
+   price = int(marketplace['pricePerCoin'])
 
    if buyCoins > coinsMarketplace:
       return render_template('marketplace.html', username=username, alert='coinsMarketplace', bal = user['balance'], co = user['coins'],

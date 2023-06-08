@@ -51,16 +51,23 @@ def index():
 @app.route('/fig')
 def fig():
    priceList=[]
+   timeList=[]
    for item in collectionMarketplace.find({}):
       priceList.append(int(item['pricePerCoin']))
+      timeList.append(item['createdAt'].strftime("%B %d. %Hh"))
    x = range(0,len(priceList))
-   plt.plot(x,priceList, color='#FFFFFF', marker='o')
+   print(timeList)
+   size = [20]
+   plt.figure(figsize=(12,4))
+   plt.grid(True, color='#2A3459', axis='y', zorder=0)
+   plt.gca().set_axisbelow(True)
+   plt.plot(timeList, priceList, color='#FFFFFF', marker='.', zorder=1)
+   plt.scatter(timeList[-1], priceList[-1], 50, color='r', marker='o', zorder=2)
    plt.gca().set_facecolor('#212946')
-   plt.gca().axes.xaxis.set_visible(False)
-   plt.grid(True, color='#2A3459')
+   #plt.gca().axes.xaxis.set_visible(False)
    plt.ylabel('Price per Coin')
    img = BytesIO()
-   plt.savefig(img, format='png', dpi=100)
+   plt.savefig(img, format='png')
    img.seek(0)
    return send_file(img, mimetype='image/png')
 

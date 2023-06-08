@@ -216,11 +216,12 @@ def buy_coins(username):
    buyCoins = int(request.form['buyfromwebsite'])
    coinsMarketplace = remainingCoins['coins']
    price = marketplace['pricePerCoin']
+   price = int(price)
 
    if buyCoins > coinsMarketplace:
       return render_template('marketplace.html', username=username, alert='coinsMarketplace', bal = user['balance'], co = user['coins'],
                              coins=coinsMarketplace, documents=documents, price=price)
-   elif user['balance'] < buyCoins * price:
+   elif int(user['balance']) < int(buyCoins) * price:
       return render_template('marketplace.html', username=username, alert='balance', bal = user['balance'], co = user['coins'], coins=coinsMarketplace,
                              documents=documents, price=price)
 
